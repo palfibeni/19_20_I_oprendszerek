@@ -6,3 +6,6 @@
 - ./a.out argument1 argument2 etc... -> runs the program with given arguments (first parameter is always the name of the file)
 - atoi -> converts to int
 - there is no String in C, only char[]
+- printf with \n ensures that the puffer gets emptied.
+- malloc(size) allocates memory for the given size ex.: malloc(80*sizeof(char))
+- strcmp(str1, str2) -> find difference between two string, returns 0 if the same
