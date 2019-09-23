@@ -1,0 +1,1 @@
+fork() -> Létrehozunk még egy folyamatot az adott programból.
