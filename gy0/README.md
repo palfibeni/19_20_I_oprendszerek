@@ -1,4 +1,4 @@
-Órán felmerült kérdések:
+Questions:
 
 - char * -> points to a character in the memory, there could be more beind, which results in string, or char array
 - char ** -> points to a string or char array, there could be more, results in string array.
