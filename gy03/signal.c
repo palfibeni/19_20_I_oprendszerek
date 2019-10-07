@@ -20,6 +20,7 @@ int main(){
   if (child>0)
   { 
     printf("Parent started\n",SIGTERM);
+    sleep(1);
     kill(child, SIGTERM);
     int status;
     wait(&status);
