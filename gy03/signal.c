@@ -5,13 +5,16 @@
 
 void handler(int signumber){
   printf("Signal with number %i has arrived\n",signumber);
+  signal(SIGTERM,SIG_DFL); 
+  raise(SIGTERM);
 }
 
 int main(){
 
     
   signal(SIGTERM,handler); //handler = SIG_IGN - ignore the signal (not SIGKILL,SIGSTOP), 
-                           //handler = SIG_DFL - back to default behavior 
+  //signal(SIGTERM,SIG_IGN);                       //handler = SIG_DFL - back to default behavior 
+  //signal(SIGTERM,SIG_DFL);  
   
   pid_t child=fork();
   if (child>0)
@@ -25,7 +28,7 @@ int main(){
   else 
   {
     printf("Waits 3 seconds, then send a SIGTERM %i signal\n",SIGTERM);
-    sleep(3);
+    //sleep(3);
     kill(getppid(),SIGTERM); 
     //1. parameter the pid number of process, we send the signal
     // 		if -1, then eacho of the processes of the same uid get the signal
