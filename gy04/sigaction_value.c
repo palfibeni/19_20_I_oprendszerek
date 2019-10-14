@@ -46,6 +46,7 @@ void handler(int signumber,siginfo_t* info,void* nonused){
 int main(){
 
   struct student zoli={"Zoli",2014}; // define a data structure to send
+  struct student adam={"Barath Adam",2014}; // define a data structure to send
   struct sigaction sigact;
   
   sigact.sa_sigaction=handler; //instead of sa_handler, we use the 3 parameter version
@@ -93,12 +94,9 @@ int main(){
     //sleep(1);
     //union sigval s_value_int={5};
     //sigqueue(getppid(),SIGTERM,s_value_int); //just the same as kill function, but we can send additional data too 
-    
-    struct student adam={"Barath Adam",2014}; // define a data structure to send
     sleep(1);
     union sigval s_value_ptr;
-    s_value_ptr.sival_ptr=&zoli;  //the struct data must define in commmon code
-				//so &adam instead &zoli is a bad solution
+    s_value_ptr.sival_ptr=&adam;  //the struct data must define in commmon code
     sigqueue(getppid(),SIGTERM,s_value_ptr);
     printf("Child process ended\n");  
   }
