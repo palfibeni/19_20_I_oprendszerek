@@ -1,16 +1,16 @@
 # Questions
 
 ## C:
-- kill(pid, param): calls kill -param for given pid
-- pause(): waits for a "signal" from the system, it could be a kill command
-    -- possibly DEADLOCK
-- signal(param, handler): if param signal recieved, run handler instead
-    -- if the given handler is SIG_IGN, ignored signal won't unlock pause().
-    -- if the given handler is SIG_DFL, the command's default functionality runs.
-- raise(param): signals the current process with the given param, could be SIGTERM to terminate it.
+- Block a signal:
+-- sigset_t sigset; // creates a sigset_t
+-- sigemptyset(&sigset); // init empty signal set
+-- sigaddset(&sigset,SIGTERM); //add SIGTERM to set
+-- //sigfillset(&sigset); //add each signal to the set
+-- sigprocmask(SIG_BLOCK,&sigset,NULL); //signals in sigset will be blocked, pasue will wait further
+-- sigprocmask(SIG_UNBLOCK,&sigset,NULL); //SIGTERM is now released (not blocked further), the process will get it
 
+- Adding complex handler to signal, with data: gy04/sigaction.value.c
 
 ## bash:
-- kill -SIGKILL pid: terminates a process instantly.
-- kill -SIGTERM pid: terminates a process, can be caught, and ignored.
+- gcc -lrt filename
 

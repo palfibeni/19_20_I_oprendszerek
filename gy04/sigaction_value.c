@@ -35,9 +35,9 @@ void handler(int signumber,siginfo_t* info,void* nonused){
                    timer_delete(t_id); //stops timer
                    break;
     case SI_QUEUE: printf("It was sent by a sigqueue, sending process (PID %i)\n",info->si_pid);
-             //    printf("Additional value: %i\n",info->si_value.sival_int);
-                   struct student* d=(struct student*)info->si_value.sival_ptr;                     
-                   printf("Additional value: %s, %i\n",d->name,d->year);
+                 printf("Additional value: %i\n",info->si_value.sival_int);
+              //     struct student* d=(struct student*)info->si_value.sival_ptr;                     
+               //    printf("Additional value: %s, %i\n",d->name,d->year);
                    break;
     default: printf("It was sent by something else \n");
   } 
@@ -59,7 +59,7 @@ int main(){
   myevent.sigev_value.sival_int=5; // myevent.sigev_value.sival_ptr - an address
   
   
-  int bad=timer_create(CLOCK_REALTIME, &myevent,&t_id);
+  /*int bad=timer_create(CLOCK_REALTIME, &myevent,&t_id);
   if (bad!=0) {perror("Error\n");exit(EXIT_FAILURE);}
   struct itimerspec mytimerspec;
   mytimerspec.it_value.tv_sec=1;
@@ -71,35 +71,35 @@ int main(){
   printf("Send a SIGTERM by the timer in 1 sec\n");
   pause();
   printf("\n---------------------------------\n");  
-  // timer_delete(t_id);	// timer delete
+  // timer_delete(t_id);	// timer delete*/
   pid_t child=fork();
   if (child>0)
   {
     printf("Parent (PID %i) waits for a signal from child (PID %i) \n",getpid(),child);
     pause();
     printf("\n---------------------------------\n");  
-    pause();
-    wait(NULL);
+    //pause();
+    //wait(NULL);
     printf("Parent process ended\n");
   }
   else 
   {
-    printf("Child process (PID %i), will send a SIGTERM to parent\n",getpid());
-    sleep(1);
-    kill(getppid(),SIGTERM);
+    //printf("Child process (PID %i), will send a SIGTERM to parent\n",getpid());
+    //sleep(1);
+    //kill(getppid(),SIGTERM);
     
     //sendig an integer as an additional data 
-    /*
+    
     sleep(1);
     union sigval s_value_int={5};
     sigqueue(getppid(),SIGTERM,s_value_int); //just the same as kill function, but we can send additional data too 
-    */
-  struct student adam={"Barath Adam",2014}; // define a data structure to send
+    
+    /*struct student adam={"Barath Adam",2014}; // define a data structure to send
     sleep(1);
     union sigval s_value_ptr;
     s_value_ptr.sival_ptr=&zoli;  //the struct data must define in commmon code
 				//so &adam instead &zoli is a bad solution
-    sigqueue(getppid(),SIGTERM,s_value_ptr);
+    sigqueue(getppid(),SIGTERM,s_value_ptr);*/
     printf("Child process ended\n");  
   }
   return 0;
