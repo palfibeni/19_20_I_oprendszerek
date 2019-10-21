@@ -26,25 +26,32 @@
 
            if (pid == 0) 
 	   {		    	// child process
-	       sleep(3);	// sleeping a few seconds, not necessary
-               close(pipefd[1]);  //Usually we close the unused write end
-	       printf("Gyerek elkezdi olvasni a csobol az adatokat!\n");
-               read(pipefd[0],sz,sizeof(sz)); // reading max 100 chars
-               printf("Gyerek olvasta uzenet: %s",sz);
-	       printf("\n");
-               close(pipefd[0]); // finally we close the used read end
+	       //sleep(3);	// sleeping a few seconds, not necessary
+               //close(pipefd[1]);  //Usually we close the unused write end
+            printf("Gyerek elkezdi olvasni a csobol az adatokat!\n");
+            read(pipefd[0],sz,sizeof(sz)); // reading max 100 chars
+            printf("Gyerek olvasta uzenet: %s",sz);
+            printf("\n");
+            write(pipefd[1], "Hajra Másik!",13);
+            close(pipefd[0]); // finally we close the used read end
            } 
            else 
            {    // szulo process 
-               printf("Szulo indul!\n");
-               close(pipefd[0]); //Usually we close unused read end
-               write(pipefd[1], "Hajra Fradi!",13);
-               close(pipefd[1]); // Closing write descriptor 
-               printf("Szulo beirta az adatokat a csobe!\n");
-               fflush(NULL); 	// flushes all write buffers (not necessary)
-               wait(NULL);		// waiting for child process (not necessary)
-				// try it without wait()
-	       printf("Szulo befejezte!");	
+                printf("Szulo indul!\n");
+               //close(pipefd[0]); //Usually we close unused read end
+                write(pipefd[1], "Hajra Fradi!",13);
+                close(pipefd[1]); // Closing write descriptor 
+                printf("Szulo beirta az adatokat a csobe!\n");
+                fflush(NULL); 	// flushes all write buffers (not necessary)
+                wait(NULL);		// waiting for child process (not necessary)
+                    // try it without wait()
+            printf("Szülő elkezdi olvasni a csobol az adatokat!\n");
+               
+                read(pipefd[0],sz,sizeof(sz)); // reading max 100 chars
+                printf("Szülő olvasta uzenet: %s",sz);
+            printf("\n");
+                close(pipefd[0]);
+               printf("Szulo befejezte!");	
 	   }
 	   exit(EXIT_SUCCESS);	// force exit, not necessary
        }
