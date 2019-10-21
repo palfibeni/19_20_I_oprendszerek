@@ -19,6 +19,7 @@ int main(){
   //sleep is not a real time safe function
   sigact.sa_flags=SA_RESTART; //the interrupted signal will restart!!!
   sigaction(SIGUSR1,&sigact,NULL);
+  sigaction(SIGRTMAX,&sigact,NULL);
   //SIGUSR1 normal signal *** ONLY ONE is delivered
   //1. parameter the signal number
   //2. parameter the new sigaction with handler and blocked signals during the execution of handler (sa_mask) and a 
@@ -52,9 +53,9 @@ int main(){
     sleep(1);
     int i;
     for (i=0;i<5;i++){
-      kill(getppid(),SIGUSR1);
+      kill(getppid(),SIGRTMAX);
       kill(getppid(),SIGRTMIN);
-//      sleep(2);  //if sleep is working, then sigusr1 has done before the next call performs
+      //sleep(2);  //if sleep is working, then sigusr1 has done before the next call performs
     }
     printf("Child process ended\n");  
   }
