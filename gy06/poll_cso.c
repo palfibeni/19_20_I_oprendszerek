@@ -60,7 +60,7 @@ int main(){
  } 
  //-------------------------------------------------
  //Now we write into the pipe - so it can read
- /*printf("Second part!\n"); 
+ printf("Second part!\n"); 
  poll_fds[0].events=POLLIN;
  pid_t child=fork();
  if (child>0)
@@ -91,7 +91,7 @@ int main(){
   {
 	printf("Returned poll: %i",result);
   }
- }*/
+ }
  unlink("/tmp/evgdzd");
  return 0; 
 }
