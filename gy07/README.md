@@ -1,0 +1,6 @@
+# Questions
+
+## C:
+    
+
+## bash:
