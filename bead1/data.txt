@@ -1,0 +1,10 @@
+Beni;1;1
+Viki;1;1
+Maci;1;2
+Jani;3;1
+Józsi;5;2
+Karcsi;2;3
+Babar;2;2
+Béla;2;2
+Csabi;4;1
+Évi;4;1
